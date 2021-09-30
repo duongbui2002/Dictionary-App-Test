@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
@@ -25,9 +27,18 @@
                 <ListView fx:id="listView" prefHeight="195.0" prefWidth="100.0" GridPane.columnIndex="0"
                           GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="2">
                 </ListView>
-                <TextField fx:id="textSearch" prefHeight="26.0" prefWidth="181.0"
-                           GridPane.columnSpan="2"/>
+                <TextField fx:id="textSearch" prefHeight="26.0" prefWidth="181.0" GridPane.columnSpan="2"/>
             </children>
         </GridPane>
     </left>
+    <bottom>
+        <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER">
+            <graphic>
+                <ImageView fitHeight="100.0" fitWidth="100.0" rotate="180.0">
+                    <Image url="@ImageIcon/add.png"/>
+
+                </ImageView>
+            </graphic>
+        </Button>
+    </bottom>
 </BorderPane>
