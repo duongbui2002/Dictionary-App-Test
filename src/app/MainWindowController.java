@@ -1,6 +1,8 @@
 package app;
 
 import app.base.Dictionary;
+import app.base.DictionaryV2;
+import app.base.Word;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -9,11 +11,12 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class MainWindowController {
-  private ObservableList<String> data =
-      FXCollections.observableArrayList(Dictionary.getInstance().getWordTarget());
-  @FXML private ListView<String> listView;
+import java.util.ArrayList;
 
+public class MainWindowController {
+  private ObservableList<Word> data =
+      FXCollections.observableArrayList(DictionaryV2.getDictionary());
+  @FXML private ListView<Word> listView;
   @FXML private TextArea itemDetailsTextArea;
   @FXML private TextField textSearch;
 
@@ -23,23 +26,17 @@ public class MainWindowController {
         .getSelectionModel()
         .selectedItemProperty()
         .addListener(
-            new ChangeListener<String>() {
+            new ChangeListener<Word>() {
               @Override
               public void changed(
-                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                  ObservableValue<? extends Word> observable, Word oldValue, Word newValue) {
                 if (newValue != null) {
-                  String word = listView.getSelectionModel().getSelectedItem();
-                  String wordExplain =
-                      Dictionary.getDictionary()
-                          .get(
-                              Dictionary.getInstance()
-                                  .binaryLookUp(word, 0, Dictionary.getSize() - 1))
-                          .getWord_explain();
-                  itemDetailsTextArea.setText(wordExplain);
+                  Word word = listView.getSelectionModel().getSelectedItem();
+                  itemDetailsTextArea.setText(word.getWord_explain());
                 }
               }
             });
-    FilteredList<String> flWordTarget = new FilteredList<>(data, p -> true);
+    FilteredList<Word> flWordTarget = new FilteredList<>(data, p -> true);
 
     textSearch.setPromptText("Search here");
     textSearch
@@ -47,16 +44,21 @@ public class MainWindowController {
         .addListener(
             ((observable, oldValue, newValue) -> {
               flWordTarget.setPredicate(
-                  p -> p.toLowerCase().contains(newValue.toLowerCase().trim()));
+                  p -> p.getWord_target().toLowerCase().contains(newValue.toLowerCase().trim()));
             }));
-    listView.setItems(flWordTarget);
+    if (flWordTarget.size() > 0) {
+      listView.setItems(flWordTarget);
+    } else {
+      listView.getItems().setAll();
+    }
+
     listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     listView.getSelectionModel().selectFirst();
   }
 
   @FXML
   public void handleClickListView() {
-    String item = listView.getSelectionModel().getSelectedItem();
-    itemDetailsTextArea.setText(item);
+    Word item = listView.getSelectionModel().getSelectedItem();
+    itemDetailsTextArea.setText(item.getWord_explain());
   }
 }

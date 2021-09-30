@@ -1,36 +1,37 @@
 package app.base;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 
-public class Dictionary {
-  private static ArrayList<Word> dictionary = new ArrayList<>();
-  private static Dictionary instance = new Dictionary();
+public class DictionaryV2 {
+  private static DictionaryV2 instance = new DictionaryV2();
+  private static String filename = "ListWord.txt";
 
-  public Dictionary(ArrayList<Word> dictionary_) {
-    dictionary = dictionary_;
-  }
+  private static ObservableList<Word> dictionary;
 
-  public Dictionary() {}
-
-  public static ArrayList<Word> getDictionary() {
+  public ObservableList<Word> getWordsList() {
     return dictionary;
   }
 
-  public static void push(Word word) {
-    int indexToAdd = searchIndexToInsert(0, dictionary.size() - 1, word);
-    if (indexToAdd >= 0 && indexToAdd <= dictionary.size()) {
-      dictionary.add(indexToAdd, word);
-    }
+  public static DictionaryV2 getInstance() {
+    return instance;
   }
 
   public static int getSize() {
     return dictionary.size();
   }
-  // The function is used to compare and
-  // find the appropriate position to insert words in sorted order
+
   private static int searchIndexToInsert(int st, int end, Word word_add) {
     if (end < st) return st;
     int mid = st + (end - st) / 2;
@@ -83,9 +84,46 @@ public class Dictionary {
     return listWordTarget;
   }
 
-  public static Dictionary getInstance() {
-    return instance;
+  public void LoadDictionary() throws IOException {
+    dictionary = FXCollections.observableArrayList();
+    Path path = Paths.get(filename);
+    BufferedReader br = Files.newBufferedReader(path);
+    try {
+      String line = null;
+      while ((line = br.readLine()) != null) {
+        line = line.trim().toLowerCase();
+        String[] separated_line = line.split("\t");
+        dictionary.add(new Word(separated_line[0], separated_line[1]));
+      }
+      DictionaryV2.sortDir();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
+      if (br != null) {
+        br.close();
+      }
+    }
   }
-  // Load from file
-  public void LoadDictionary() throws IOException {}
+
+  public static ObservableList<Word> getDictionary() {
+    return dictionary;
+  }
+
+  public void storeTodoItems() throws IOException {
+
+    Path path = Paths.get(filename);
+    BufferedWriter bw = Files.newBufferedWriter(path);
+    try {
+      Iterator<Word> iter = dictionary.iterator();
+      while (iter.hasNext()) {
+        Word word = iter.next();
+        bw.write(String.format("%s\t%s", word.getWord_target(), word.getWord_explain()));
+        bw.newLine();
+      }
+    } finally {
+      if (bw != null) {
+        bw.close();
+      }
+    }
+  }
 }

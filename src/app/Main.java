@@ -1,6 +1,7 @@
 package app;
 
 import app.base.DictionaryManagement;
+import app.base.DictionaryV2;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,5 +23,24 @@ public class Main extends Application {
     primaryStage.setTitle("Dictionary");
     primaryStage.setScene(new Scene(root, 900, 500));
     primaryStage.show();
+  }
+
+  @Override
+  public void init() throws Exception {
+    try {
+      DictionaryV2.getInstance().LoadDictionary();
+    } catch (IOException e) {
+      System.out.println(e.getMessage());
+    }
+  }
+
+  @Override
+  public void stop() throws Exception {
+    try {
+      DictionaryV2.getInstance().storeTodoItems();
+
+    } catch (IOException e) {
+      System.out.println(e.getMessage());
+    }
   }
 }
