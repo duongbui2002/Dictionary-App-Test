@@ -126,4 +126,11 @@ public class DictionaryV2 {
       }
     }
   }
+
+  public static void push(Word word) {
+    int indexToAdd = searchIndexToInsert(0, dictionary.size() - 1, word);
+    if (indexToAdd >= 0 && indexToAdd <= dictionary.size()) {
+      dictionary.add(indexToAdd, word);
+    }
+  }
 }

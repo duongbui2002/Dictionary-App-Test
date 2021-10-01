@@ -9,9 +9,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class MainWindowController {
   private ObservableList<Word> data =
@@ -19,6 +23,7 @@ public class MainWindowController {
   @FXML private ListView<Word> listView;
   @FXML private TextArea itemDetailsTextArea;
   @FXML private TextField textSearch;
+  @FXML private BorderPane mainBorderPane;
 
   public void initialize() {
 
@@ -54,6 +59,40 @@ public class MainWindowController {
 
     listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     listView.getSelectionModel().selectFirst();
+  }
+
+  @FXML
+  public void showNewWordDialog() {
+    Dialog<ButtonType> dialog = new Dialog<>();
+    dialog.initOwner(mainBorderPane.getScene().getWindow());
+    dialog.setTitle("Add New Word");
+    dialog.setHeaderText("Use this dialog to add a new Word");
+    FXMLLoader fxmlLoader = new FXMLLoader();
+    fxmlLoader.setLocation(getClass().getResource("Dialog.fxml"));
+    try {
+      dialog.getDialogPane().setContent(fxmlLoader.load());
+
+    } catch (IOException e) {
+      System.out.println("Couldn't load the dialog");
+      e.printStackTrace();
+      return;
+    }
+
+    dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+    dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+    Optional<ButtonType> result = dialog.showAndWait();
+
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+      DialogController controller = fxmlLoader.getController();
+
+      Word newWord = controller.processResults();
+      if (newWord != null) {
+        listView.setItems(DictionaryV2.getDictionary());
+        listView.getSelectionModel().select(newWord);
+      } else {
+        showNewWordDialog();
+      }
+    }
   }
 
   @FXML
