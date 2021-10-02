@@ -1,0 +1,44 @@
+
+U
+java:S1118	":Add a private constructor to hide the implicit public one.(©¹¤Ñúÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ğÖÍËüÿÿÿÿ
+N	java:S106"9Replace this use of System.out or System.err by a logger.(Á‹Ââ
+N	java:S106"9Replace this use of System.out or System.err by a logger.(Á‹Ââ
+S	java:S106!"9Replace this use of System.out or System.err by a logger.(Œ¥†ÿÿÿÿÿ
+S	java:S106""9Replace this use of System.out or System.err by a logger.(ŸæüÂûÿÿÿÿ
+S	java:S106$"9Replace this use of System.out or System.err by a logger.(î”ñ£şÿÿÿÿ
+S	java:S106>"9Replace this use of System.out or System.err by a logger.(Ë«¢üÿÿÿÿ
+E
+java:S2201@"/The return value of "toLowerCase" must be used.(ó‹Åù
+N	java:S106D"9Replace this use of System.out or System.err by a logger.(µäóĞ
+S	java:S106F"9Replace this use of System.out or System.err by a logger.(¾¨Ú¿øÿÿÿÿ
+W
+java:S1854K"<Remove this useless assignment to local variable "scanner_".(†Æ¢åøÿÿÿÿ
+H
+java:S1481K"-Remove this unused "scanner_" local variable.(†Æ¢åøÿÿÿÿ
+N	java:S106L"9Replace this use of System.out or System.err by a logger.(È’ˆ½
+N	java:S106Q"9Replace this use of System.out or System.err by a logger.(µäóĞ
+S	java:S106T"9Replace this use of System.out or System.err by a logger.(°³‡¡ûÿÿÿÿ
+N	java:S106\"9Replace this use of System.out or System.err by a logger.(ùÜÃø
+N	java:S106b"9Replace this use of System.out or System.err by a logger.(µäóĞ
+N	java:S106d"9Replace this use of System.out or System.err by a logger.(ôèÆĞ
+S	java:S106f"9Replace this use of System.out or System.err by a logger.(ß±¯ÿÿÿÿÿ
+N	java:S106j"9Replace this use of System.out or System.err by a logger.(É³¹ò
+y
+java:S1192D"cDefine a constant instead of duplicating this literal "This word is not in the dictionary" 3 times.(µäóĞ
+f	java:S117#"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´Œƒ©
+f	java:S117%"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õ¯ù­
+k	java:S1172"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şü—êşÿÿÿÿ
+k	java:S117="QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†Æ¢åøÿÿÿÿ
+k	java:S117K"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†Æ¢åøÿÿÿÿ
+f	java:S117M"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´Œƒ©
+k	java:S117["QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†Æ¢åøÿÿÿÿ
+f	java:S117]"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´Œƒ©
+n
+java:S1104
+"SMake scanner a static final constant or non-public and provide accessors if needed.(¾©´¬øÿÿÿÿ
+H
+java:S1444
+"-Make this "public static scanner" field final(¾©´¬øÿÿÿÿ
+g
+java:S2095-"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(™¹ëÕûÿÿÿÿ

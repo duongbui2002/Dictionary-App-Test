@@ -1,0 +1,13 @@
+
+k	java:S116"VRename this field "word_target" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ø÷ü
+l	java:S116"WRename this field "word_explain" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–¿–æ
+o
+java:S1210("YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(ÖÄ¤™
+h	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ô´€Âùÿÿÿÿ
+h	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ø§Äıÿÿÿÿ
+c	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô€¾»
+h	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸çÏ¡ûÿÿÿÿ
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŠçÓøÿÿÿÿ
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŠçÓøÿÿÿÿ
+f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô€¾»
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸çÏ¡ûÿÿÿÿ

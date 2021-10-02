@@ -1,0 +1,21 @@
+ant	kien
+baby	em be
+bike	xe dap
+book	sach
+bus	xe bus
+cancel	huy bo
+cancer	ung thu
+car	oto
+cat	meo
+chicken	ga
+complete	hoan thanh
+cup	cup
+dog	cho
+goodbye	tam biet
+hat	mu
+hello	xin chao
+hint	goi y
+like	thich
+love	tinh yeu
+milk	sua
+pull	keo

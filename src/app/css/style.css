@@ -1,0 +1,11 @@
+.button {
+    -fx-border-radius: 50%;
+    -fx-padding: 10px;
+    -fx-background-radius: 50%;
+}
+
+#translateButton {
+    -fx-padding: 10px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}

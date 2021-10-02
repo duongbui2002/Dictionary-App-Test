@@ -8,12 +8,24 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -24,9 +36,21 @@ public class MainWindowController {
   @FXML private TextArea itemDetailsTextArea;
   @FXML private TextField textSearch;
   @FXML private BorderPane mainBorderPane;
+  @FXML private ContextMenu listContextMenu;
+  @FXML private Button buttonSwitch;
 
   public void initialize() {
-
+    listContextMenu = new ContextMenu();
+    MenuItem deleteWordMenu = new MenuItem("Delete");
+    deleteWordMenu.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent event) {
+            Word word_to_delete = listView.getSelectionModel().getSelectedItem();
+            deleteWord(word_to_delete);
+          }
+        });
+    listContextMenu.getItems().addAll(deleteWordMenu);
     listView
         .getSelectionModel()
         .selectedItemProperty()
@@ -59,6 +83,38 @@ public class MainWindowController {
 
     listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     listView.getSelectionModel().selectFirst();
+
+    listView.setCellFactory(
+        new Callback<ListView<Word>, ListCell<Word>>() {
+          @Override
+          public ListCell<Word> call(ListView<Word> param) {
+            ListCell<Word> cell =
+                new ListCell<Word>() {
+
+                  @Override
+                  protected void updateItem(Word item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                      setText(null);
+                    } else {
+                      setText(item.getWord_target());
+                    }
+                  }
+                };
+
+            cell.emptyProperty()
+                .addListener(
+                    (obs, wasEmpty, isNowEmpty) -> {
+                      if (isNowEmpty) {
+                        cell.setContextMenu(null);
+                      } else {
+                        cell.setContextMenu(listContextMenu);
+                      }
+                    });
+
+            return cell;
+          }
+        });
   }
 
   @FXML
@@ -99,5 +155,31 @@ public class MainWindowController {
   public void handleClickListView() {
     Word item = listView.getSelectionModel().getSelectedItem();
     itemDetailsTextArea.setText(item.getWord_explain());
+  }
+
+  public void deleteWord(Word word_to_delete) {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Delete this word");
+    alert.setHeaderText("Delete this word: " + word_to_delete.getWord_target());
+    alert.setContentText("Are you sure?  Press OK to confirm, or cancel to Back out.");
+    Optional<ButtonType> result = alert.showAndWait();
+
+    if (result.isPresent() && (result.get() == ButtonType.OK)) {
+      DictionaryV2.getDictionary().remove(word_to_delete);
+    }
+  }
+
+  @FXML
+  public void handleKeyPressed(KeyEvent keyEvent) {
+    Word selectedWord = listView.getSelectionModel().getSelectedItem();
+    if (selectedWord != null) {
+      if (keyEvent.getCode().equals(KeyCode.DELETE)) {
+        deleteWord(selectedWord);
+      }
+    }
+  }
+
+  public Button getButtonSwitch() {
+    return buttonSwitch;
   }
 }

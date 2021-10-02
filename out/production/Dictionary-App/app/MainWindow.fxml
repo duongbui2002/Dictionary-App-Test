@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="mainBorderPane" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="app.MainWindowController">
+<BorderPane fx:id="mainBorderPane" xmlns="http://javafx.com/javafx/11.0.2" stylesheets="@css/style.css"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.MainWindowController">
     <center>
         <VBox style="-fx-background-color: white">
             <TextArea fx:id="itemDetailsTextArea" VBox.vgrow="ALWAYS"/>
@@ -24,9 +24,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <ListView fx:id="listView" prefHeight="195.0" prefWidth="100.0" GridPane.columnIndex="0"
-                          GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="2"
-                          style="-fx-font-size: 20">
+                <ListView fx:id="listView" onKeyPressed="#handleKeyPressed" prefHeight="195.0" prefWidth="100.0"
+                          style="-fx-font-size: 20" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                          GridPane.rowIndex="1" GridPane.rowSpan="2">
                 </ListView>
                 <TextField fx:id="textSearch" prefHeight="60.0" prefWidth="181.0" GridPane.columnSpan="2">
                     <font>
@@ -44,7 +44,7 @@
                         <Tooltip text="Add a new  word"/>
                     </tooltip>
                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" translateZ="5.0">
+                        <ImageView fitHeight="40.0" fitWidth="40.0" translateZ="5.0">
                             <image>
                                 <Image url="@ImageIcon/list-plus.png"/>
                             </image>
@@ -52,6 +52,15 @@
                     </graphic>
                 </Button>
             </HBox>
+            <Button fx:id="buttonSwitch" mnemonicParsing="false">
+                <graphic>
+                    <ImageView fitHeight="40.0" fitWidth="40.0">
+                        <image>
+                            <Image url="@ImageIcon/translate (2).png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
         </ToolBar>
 
     </top>
